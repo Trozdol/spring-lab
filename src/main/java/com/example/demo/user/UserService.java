@@ -28,7 +28,7 @@ public class UserService {
 		User user = select(id);
 		
 		try {
-			return user.update(editedUser);
+			return (User) user.update(editedUser);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

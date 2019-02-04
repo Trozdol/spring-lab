@@ -1,43 +1,18 @@
 package com.example.demo.user;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Date;
 
+import com.example.demo.Model;
 
-public class User {
+
+public class User extends Model {
 	
 	public User() {
-		
+		super();		
 	}
-	
 	public User(Integer id) {
+		super();
 		this.bwUserID = id;
-	}
-	
-	public User update(Object changes) throws Exception {
-		System.out.println("update()");
-		for (Field field : changes.getClass().getDeclaredFields()) {
-			
-			if (field.get(changes) == null || field.get(changes) == field.get(this)) continue;
-
-            String fieldName = field.getName();
-            String setterName = String.format("set%1$s", capitalize(fieldName));
-			Method setter = this.getClass().getDeclaredMethod(setterName, field.get(changes).getClass());
-			
-			System.out.println(fieldName + ": " + field.get(this) + " => " + field.get(changes));
-			
-			setter.invoke(this, field.get(changes));
-		}
-		return this;
-	}
-
-    private String capitalize(String input) {
-		if (input == null || input.length() < 1) return input;
-		char[] chars = input.toCharArray();
-		chars[0] = Character.toUpperCase(chars[0]);
-		return new String(chars);
 	}
     
 	private Integer bwUserID;
